@@ -1,67 +1,48 @@
+abstract class Animal{}
+
+
+abstract class Mamifero extends Animal{}
+abstract class Ave extends Animal{}
+abstract class Pez extends Animal{}
+
+abstract class Volador{
+  void volar()=> print('estoy volando');
+}
+
+abstract class Caminante{
+  void caminar()=> print('estoy cominando');
+}
+abstract class Nadador{
+  void nadar()=> print('estoy nadando');
+}
+
+class Delfin extends Mamifero with Nadador{}
+class Murcielago extends Mamifero with Volador,Caminante{}
+class Gato extends Mamifero with Caminante{}
+
+class Paloma extends Ave with Caminante,Volador{}
+class Pato extends Mamifero with Volador, Caminante{}
+class Tiburon extends Pez with Nadador{}
+class PezVolador extends Pez with Nadador, Volador{}
+
 void main(){
   
-  final windPlant = WindPlant(initialEnergy: 100);
-    final nuclearPlant = NuclearPlant(energyLeft: 1000);
-
-  print('wind: ${chargerPhone(windPlant)}');
+  final flipper = Delfin();
   
-    print('Nuclear: ${chargerPhone(nuclearPlant)}');
-
-}
-double chargerPhone(EnergyPlant plant){
-  if(plant.energyLeft < 10){
-    throw Exception('Not enought energy');
-  }
-    return plant.energyLeft= 10 ;
-
-}
-
-enum PlantType {nuclear, wind, water}
-
-abstract class EnergyPlant{
+  flipper.nadar();
   
-  double energyLeft;
+  final batman = Murcielago();
   
-  final PlantType type;
+  batman.caminar();
+  batman.volar();
   
-  EnergyPlant({
-    required this.energyLeft,
-      required this.type
-  });
+  final namor = Pato();
+  namor.caminar();
+  namor.volar();
   
-  void consumeEnerfy(double amount);
   
 }
 
-//extens o implements
 
-class WindPlant extends EnergyPlant{
- 
-  WindPlant({
-    required double initialEnergy})
-    :super(energyLeft: initialEnergy,
-          type: PlantType.wind);
-@override  
-    void consumeEnerfy(double amount){
-      energyLeft -= amount;
-    }
 
-}
-
-class NuclearPlant implements EnergyPlant{
-   @override 
-  double energyLeft;
-   @override 
-  final PlantType type =  PlantType.nuclear;
-  
-  NuclearPlant({
-    required this.energyLeft
-      
-  });
-  
-  @override  
-    void consumeEnerfy(double amount){
-      energyLeft -= (amount * 0.5);
-    }
-}
 
